@@ -1,0 +1,5 @@
+-r test.txt
+-r lint.txt
+
+ipython
+pdbpp
