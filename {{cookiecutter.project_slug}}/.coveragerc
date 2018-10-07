@@ -2,7 +2,9 @@
 branch = True
 
 [report]
-fail_under = 100
 show_missing = True
 skip_covered = True
 precision = 2
+
+# use `# pragma: no cover` for untested code
+fail_under = 100

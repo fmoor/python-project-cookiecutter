@@ -1,3 +1,4 @@
 {
-  "project_slug": "my-project"
+  "project_slug": "my_project",
+  "python_version": "3.7"
 }

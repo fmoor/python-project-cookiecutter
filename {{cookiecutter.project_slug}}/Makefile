@@ -1,24 +1,37 @@
 .PHONY: help clean clean-pyc lint
 
 help:
-	@echo "clean - remove artifacts"
-	@echo "clean-pyc - remove Python file artifacts"
-	@echo "lint - check for potential errors and poor style"
+	@echo "clean - remove Python file artifacts"
+	@echo "flake8 - check for potential errors and poor style"
+	@echo "mypy - check for potential type errors"
+	@echo "lint - flake8 & mypy"
 	@echo "test - runs the tests"
-	@echo "quality - lint & test"
+	@echo "coverage - check for untested code"
+	@echo "quality - lint, test & coverage"
 
-clean: clean-pyc
-
-clean-pyc:
+clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type f -name '*~' -delete
 	find . -type d -name "__pycache__" -delete
 
-lint:
-	flake8 --config=flake8.ini
+flake8:
+	flake8
+
+mypy:
 	mypy {{ cookiecutter.project_slug }} tests
 
-test: clean
-	pytest tests/
+lint: flake8 mypy
 
-quality: lint test
+test: clean
+	pytest -vv tests/
+
+coverage: clean
+	pytest tests/ \
+	  --cov={{ cookiecutter.project_slug }}/ \
+	  --cov-report term-missing:skip-covered
+
+quality: lint clean
+	pytest tests/ \
+	  -vv \
+	  --cov={{ cookiecutter.project_slug }}/ \
+	  --cov-report=term-missing:skip-covered

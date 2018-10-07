@@ -1,2 +1,0 @@
-# Project requirements with version numbers go here.
-# i.e. pip freeze > requirements.txt

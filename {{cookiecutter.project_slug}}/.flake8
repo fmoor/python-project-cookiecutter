@@ -1,0 +1,14 @@
+[flake8]
+max-line-length = 100
+max-complexity = 10
+application-import-names = {{ cookiecutter. project_slug }},tests
+import-order-style = pycharm
+exclude =
+  .git
+  .pytest_cache
+  .mypy_cache
+  .idea
+  .venv
+  venv
+  docs
+  __pycache__
